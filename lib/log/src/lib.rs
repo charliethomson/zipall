@@ -20,6 +20,7 @@ pub fn setup_logger(module_name: &'static str) -> ZipAllResult<()> {
         AppendTimestamp::with_format("%Y%m%d", FileLimit::MaxFiles(30), DateFrom::DateYesterday),
         ContentLimit::Time(TimeFrequency::Daily),
         Compression::None,
+        #[cfg(unix)]
         None,
     );
 
