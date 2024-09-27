@@ -1,0 +1,8 @@
+[package]
+name = "zipall-paths"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+dirs = "5.0.1"
+zipall-core = { path = "../core" }

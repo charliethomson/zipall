@@ -1,0 +1,12 @@
+[package]
+name = "zipall-log"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+chrono = "0.4.38"
+fern = { version = "0.6.2", features = ["colored"] }
+file-rotate = "0.7.6"
+log = "0.4.22"
+zipall-core = { path = "../core" }
+zipall-paths = { path = "../paths" }
