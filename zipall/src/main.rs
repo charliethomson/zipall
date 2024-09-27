@@ -1,9 +1,7 @@
-use std::{collections::HashMap, path::PathBuf, time::Duration};
+use std::{collections::HashMap, path::PathBuf};
 
 use clap::Parser;
-use humansize::DECIMAL;
 use indicatif::{MultiProgress, ProgressBar, ProgressDrawTarget, ProgressStyle};
-use rand::Rng;
 use tokio::task::JoinSet;
 use zipall_core::{Scanner, ZipAllError, ZipAllResult, ZipMode, ZipSpecification, ZipStat, Zipper};
 use zipall_log::setup_logger;
@@ -46,8 +44,8 @@ async fn main() -> ZipAllResult<()> {
 
     for (i, file) in files.iter().enumerate() {
         let ftx = tx.clone();
-        let spec = ZipSpecification::new(&file, &dest, ZipMode::SevenZed)?;
-        let mut zipper = Zipper::new(spec, i, PathBuf::from(&args.bin), ftx);
+        let spec = ZipSpecification::new(file, &dest, ZipMode::SevenZed)?;
+        let zipper = Zipper::new(spec, i, PathBuf::from(&args.bin), ftx);
 
         set.spawn(async move { zipper.run().await });
     }
@@ -86,10 +84,9 @@ async fn main() -> ZipAllResult<()> {
         let bar = mb.insert(id, def);
         let r = bar.downgrade();
         bars.insert(id, bar);
-        return r;
+        r
     };
 
-    let mut interval = tokio::time::interval(Duration::from_millis(100));
     loop {
         tokio::select! {
             // _ = interval.tick() => {

@@ -9,7 +9,7 @@ use zipall_core::{ZipAllError, ZipAllResult};
 #[cfg(windows)]
 const LINE_ENDING: &'static str = "\r\n";
 #[cfg(not(windows))]
-const LINE_ENDING: &'static str = "\n";
+const LINE_ENDING: &str = "\n";
 
 pub fn setup_logger(module_name: &'static str) -> ZipAllResult<()> {
     let module = module_name.to_string();

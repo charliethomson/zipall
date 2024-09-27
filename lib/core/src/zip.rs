@@ -1,18 +1,9 @@
-use std::{
-    borrow::Cow,
-    io::{Read, Write},
-    os::unix::fs::MetadataExt,
-    path::{Path, PathBuf},
-    process::Stdio,
-    time::Duration,
-};
+use std::{path::PathBuf, process::Stdio, time::Duration};
 
-use humansize::DECIMAL;
 use lazy_static::lazy_static;
-use lzma::LzmaWriter;
 use regex::Regex;
 use tokio::{
-    io::{AsyncBufReadExt, AsyncReadExt, AsyncWrite, BufReader},
+    io::{AsyncBufReadExt, BufReader},
     sync::mpsc::UnboundedSender,
 };
 
